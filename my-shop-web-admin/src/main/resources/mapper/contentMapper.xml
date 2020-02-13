@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.myshop.web.admin.dao.ContentDao">
+    <sql id="Base_Column_List">
+        a.id,
+        a.category_id,
+        a.title,
+        a.sub_title as subTitle,
+        a.description,
+        a.url,
+        a.picture,
+        a.info,
+        a.createTime,
+        a.updateTime,
+        b.id as "contenCategory.id",
+        b.name as "contentCategory.name"
+    </sql>
+    <!-- 定义关联查询语句:tb_content的类目id与tb_content_category的id一致-->
+    <sql id="tbContentCategoryJoins">
+        left join tb_content_category as b on a.category_id = b.id
+    </sql>
+    <insert id="insert" parameterType="TbContent">
+        insert into tb_content(
+          id,
+          category_id,
+          title,
+          sub_title,
+          description,
+          url,
+          picture,
+          info,
+          createTime,
+          updateTime
+        )
+        values
+        (
+          #{id},
+          #{contentCategory.id},
+          #{title},
+          #{subTitle},
+          #{description},
+          #{url},
+          #{picture},
+          #{info},
+          #{createTime},
+          #{updateTime}
+        )
+    </insert>
+    <update id="update">
+        update tb_content
+        set
+        category_id = #{contentCategory.id},
+        title = #{title},
+        sub_title = #{subTitle},
+        description = #{description},
+        url = #{url},
+        picture = #{picture},
+        info = #{info},
+        createTime = #{createTime},
+        updateTime = #{updateTime}
+        where id = #{id}
+    </update>
+    <delete id="deleteByPrimaryKey">
+        delete
+        <include refid="Base_Column_List"/>
+        from tb_content as a
+        where a.id=#{id}
+    </delete>
+    <delete id="deleteByIds">
+        delete from tb_content
+        where id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectAll" resultType="TbContent">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_content as a
+        <include refid="tbContentCategoryJoins"/>
+    </select>
+    <select id="selectByPrimaryKey" resultType="TbContent">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_content as a
+        <include refid="tbContentCategoryJoins"/>
+        where a.id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByPage" parameterType="map" resultType="TbContent">
+        select
+        <include refid="Base_Column_List"></include>
+        from tb_content as a
+        <include refid="tbContentCategoryJoins"/>
+        <where>
+            <if test="content.title != null and content.title != ''">
+                a.title like concat('%',#{content.title},'%')
+            </if>
+            <if test="content.subTitle != null and content.subTitle != ''">
+                and a.sub_title like concat('%',#{content.subTitle},'%')
+            </if>
+            <if test="content.description != null and content.description != ''">
+                and a.description like concat('%',#{content.description},'%')
+            </if>
+        </where>
+        limit #{start},#{length}
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*)
+        from tb_content as a
+        <where>
+            <if test="title != null and title != ''">
+                a.title like concat('%',#{title},'%')
+            </if>
+            <if test="subTitle != null and subTitle != ''">
+                and a.sub_title like concat('%',#{subTitle},'%')
+            </if>
+            <if test="description != null and description != ''">
+                and a.description like concat('%',#{description},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

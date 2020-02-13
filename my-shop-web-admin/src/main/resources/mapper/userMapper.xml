@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.myshop.web.admin.dao.UserDao">
+    <sql id="Base_Column_List">
+        a.id,
+        a.email,
+        a.username,
+        a.password,
+        a.phone,
+        a.createTime,
+        a.updateTime
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="TbUser">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_user as a
+        where a.id = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from tb_user as a
+        where a.id = #{id}
+    </delete>
+    <delete id="deleteByIds">
+        delete
+        from tb_user
+        where id in
+        <foreach collection="array" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <insert id="insert" parameterType="TbUser">
+        insert into tb_user (
+        id,
+        email,
+        username,
+        password,
+        phone,
+        createTime,
+        updateTime
+        )
+        values
+        (
+        #{id},
+        #{email},
+        #{username},
+        #{password},
+        #{phone},
+        #{createTime},
+        #{updateTime}
+        )
+    </insert>
+    <update id="update" parameterType="TbUser">
+        update tb_user
+        set
+        email = #{email},
+        username = #{username},
+        password = #{password},
+        phone = #{phone},
+        createTime = #{createTime},
+        updateTime = #{updateTime}
+        where id = #{id}
+    </update>
+    <select id="selectByEmail" parameterType="string" resultType="TbUser">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from tb_user as a
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                a.email = #{email}
+            </if>
+        </where>
+    </select>
+    <select id="selectAll" resultType="TbUser">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from tb_user as a
+    </select>
+    <select id="selectByPage" parameterType="java.util.Map" resultType="TbUser">
+        select
+        <include refid="Base_Column_List"></include>
+        from tb_user as a
+        <where>
+            <if test="user.username != null and user.username != ''">
+                a.username like concat('%',#{tbUser.username},'%')
+            </if>
+            <if test="user.email != null and user.email != ''">
+                and a.email like concat('%',#{tbUser.email},'%')
+            </if>
+            <if test="user.phone != null and user.phone != ''">
+                and a.phone like concat('%',#{tbUser.phone},'%')
+            </if>
+        </where>
+        limit #{start},#{length}
+    </select>
+    <select id="selectCount" parameterType="TbUser" resultType="java.lang.Integer">
+        select count(*)
+        from tb_user as a
+        <where>
+            <if test="username != null and username != ''">
+                a.username like concat('%',#{username},'%')
+            </if>
+            <if test="email != null and email != ''">
+                and a.email like concat('%',#{email},'%')
+            </if>
+            <if test="phone != null and phone != ''">
+                and a.phone like concat('%',#{phone},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

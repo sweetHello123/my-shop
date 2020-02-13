@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.myshop.web.admin.dao.ContentCategoryDao">
+    <sql id="Base_Column_List">
+        a.id,
+        a.parent_id as parentId,
+        a.name,
+        a.status,
+        a.sort_order as sortOrder,
+        a.is_parent as isParent,
+        a.createTime,
+        a.updateTime,
+        ifnull(b.id,0) as "parentCategory.id",
+        ifnull(b.name,'/') as "parentCategory.name"
+    </sql>
+    <!-- 自关联语句 -->
+    <sql id="tbContentCategoryJoins">
+        left join tb_content_category as b on a.parent_id = b.id
+    </sql>
+    <select id="selectAll" resultType="TbContentCategory">
+        select
+        <include refid="Base_Column_List"></include>
+        from tb_content_category as a
+        <include refid="tbContentCategoryJoins"/>
+        order by
+        a.parent_id asc,
+        a.sort_order asc,
+        a.is_parent desc
+    </select>
+    <select id="selectByPrimaryKey" resultType="TbContentCategory">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_content_category as a
+        <include refid="tbContentCategoryJoins"/>
+        where a.id = #{id}
+    </select>
+    <select id="selectByPid" resultType="TbContentCategory">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_content_category as a
+        <include refid="tbContentCategoryJoins"/>
+        where a.parent_id = #{parentId}
+    </select>
+    <insert id="insert" parameterType="TbContentCategory">
+        insert into tb_content_category(
+          id,
+          parent_id,
+          name,
+          status,
+          sort_order,
+          is_parent,
+          createTime,
+          updateTime
+        )
+        values
+        (
+          #{id},
+          #{parentCategory.id},
+          #{name},
+          #{status},
+          #{sortOrder},
+          #{isParent},
+          #{createTime},
+          #{updateTime}
+        )
+    </insert>
+    <update id="update" parameterType="TbContentCategory">
+        update tb_content_category
+        set
+        id = #{id},
+        parent_id = #{parentCategory.id},
+        name = #{name},
+        status = #{status},
+        sort_order = #{sortOrder},
+        is_parent = #{isParent},
+        createTime = #{createTime},
+        updateTime = #{updateTime}
+        where id = #{id}
+    </update>
+</mapper>
