@@ -66,7 +66,7 @@ public class JacksonUtils {
     public static <T> T json2pojoByTree(String jsonString, String treeNode, Class<T> clazz) throws Exception {
         JsonNode jsonNode = objectMapper.readTree(jsonString);
         JsonNode data = jsonNode.findPath(treeNode);
-        return json2pojo(data.toString(),clazz);
+        return json2pojo(data.toString(), clazz);
     }
 
     /**
@@ -86,8 +86,9 @@ public class JacksonUtils {
      * 字符串转换为 Map<String, T>
      */
     public static <T> Map<String, T> json2map(String jsonString, Class<T> clazz) throws Exception {
-        Map<String, Map<String, Object>> map = objectMapper.readValue(jsonString, new TypeReference() {
-        });
+        Map<String, Map<String, Object>> map = (Map<String, Map<String, Object>>) objectMapper.readValue(jsonString,
+                new TypeReference<Map<String, T>>() {
+                });
         Map<String, T> result = new HashMap<>();
         for (Map.Entry<String, Map<String, Object>> entry : map.entrySet()) {
             result.put(entry.getKey(), map2pojo(entry.getValue(), clazz));
