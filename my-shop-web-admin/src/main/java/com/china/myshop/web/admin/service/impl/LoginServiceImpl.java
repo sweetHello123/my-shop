@@ -28,7 +28,6 @@ public class LoginServiceImpl implements LoginService {
 
             //去除加密后的回车换行符
             base64Password = base64Password.replaceAll("\r|\n", "");
-            user.setPassword(base64Password);
 
             if (base64Password.equals(user.getPassword())) {
                 return user;
