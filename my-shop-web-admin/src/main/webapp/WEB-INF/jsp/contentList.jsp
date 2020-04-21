@@ -160,26 +160,8 @@
             </div>
         </div>
     </div>
-
-    <!-- 详情模态框 -->
-    <div class="modal fade" id="modal-detail">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">用户详情</h4>
-                </div>
-                <div class="modal-body">
-                    <p id="modal-detail-message">&hellip;</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary pull-right" data-dismiss="modal">确定</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
+
 <script src="<%=basePath%>static/js/checkbox-init.js"></script>
 <script>
     var _dataTable;
@@ -197,11 +179,6 @@
             {data: 'title'},
             {data: 'subTitle'},
             {data: 'description'},
-            // {
-            //     data: function (row, type, val, meta) {
-            //         return '<a href="' + row.url + '" target="_blank">查看</a>'
-            //     }
-            // },
             {
                 data: function (row, type, val, meta) {
                     return '<a href="' + row.picture + '" target="_blank">查看</a>'
@@ -211,15 +188,13 @@
             {
                 //操作框
                 data: function (row, type, val, meta) {
-                    //定义查看的url
-                    var viewUrl = "/content/view?id=" + row.id;
-
                     //定义删除的url
                     var delUrl = "/content/delete";
 
-                    return '<button class="btn btn-default btn-sm" onclick="Checkbox.view(\'' + viewUrl + '\')"><i class="fa fa-search"></i>查看</button>&nbsp;&nbsp;'
-                        + '<a href="/content/form?id=' + row.id + '" type="button" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i>编辑</a>&nbsp;&nbsp;'
-                        + '<button class="btn btn-danger btn-sm" onclick="Checkbox.deleteSingle(\'' + row.id + '\',\'' + delUrl + '\')"><i class="fa fa-trash-o"></i>删除</button>';
+                    return '<a href="/content/form?id=' + row.id + '" type="button" class="btn btn-primary btn-sm">' +
+                        '<i class="fa fa-edit"></i>编辑</a>&nbsp;&nbsp;'
+                        + '<button class="btn btn-danger btn-sm" onclick="Checkbox.deleteSingle(\'' + row.id + '\',\'' + delUrl + '\')">' +
+                        '<i class="fa fa-trash-o"></i>删除</button>';
                 }
             }
         ];

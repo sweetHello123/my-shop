@@ -42,14 +42,13 @@ public class TbContent extends BaseEntity {
     private String picture;
 
     /**
-     * 内容
+     * 详情
      */
-    @NotNull(message = "详情不能为空")
     private String info;
 
     /**
      * 关联类目对象
      */
-    @NotNull(message = "父级类目不能为空")
+    @NotNull(message = "类目不能为空")
     private TbContentCategory contentCategory;
 }

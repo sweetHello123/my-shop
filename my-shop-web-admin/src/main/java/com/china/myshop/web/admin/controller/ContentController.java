@@ -64,6 +64,11 @@ public class ContentController {
      */
     @RequestMapping(value = "save", method = {RequestMethod.POST})
     public String save(TbContent content, Model model, RedirectAttributes redirectAttributes) {
+        if (content.getId() != null) {
+            System.out.println(content.getContentCategory().getId());
+            System.out.println(content.getContentCategory().getName());
+        }
+
         BaseResult result = contentService.save(content);
         if (result.getStatusCode() == BaseResult.STATUS_SUCCESS) {
             redirectAttributes.addFlashAttribute("result", result);

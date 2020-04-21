@@ -68,15 +68,24 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">父级类目</label>
+                                        <label class="col-sm-2 control-label">所属类目</label>
+                                        <!-- 类目id栏隐藏 -->
+                                        <form:input id="categoryId" path="contentCategory.id"
+                                                    value="${content.contentCategory.id}" cssStyle="display: none"/>
                                         <div class="col-sm-10">
-                                            <form:hidden id="categoryId" path="contentCategory.id"
-                                                         value="${content.contentCategory.id}"/>
-                                            <input id="categoryName" class="form-control" placeholder="请选择"
-                                                   readonly="true" data-toggle="modal" data-target="#modal-tree"
-                                                   value="${content.contentCategory.name}" required/>
+                                            <c:if test="${content.id==null}">
+                                                <input id="categoryName" class="form-control" placeholder="请选择"
+                                                       readonly="true" data-toggle="modal" data-target="#modal-tree"
+                                                       value="${content.contentCategory.name}" required/>
+                                            </c:if>
+                                            <c:if test="${content.id!=null}">
+                                                <form:input id="categoryName" cssClass="form-control"
+                                                            path="contentCategory.name"
+                                                            value="${content.contentCategory.name}" readonly="true"/>
+                                            </c:if>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="title" class="col-sm-2 control-label">标题</label>
                                         <div class="col-sm-10">
@@ -84,6 +93,7 @@
                                                         placeholder="请输入标题"/>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="subTitle" class="col-sm-2 control-label">子标题</label>
                                         <div class="col-sm-10">
@@ -91,6 +101,7 @@
                                                         placeholder="请输入子标题"/>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="description" class="col-sm-2 control-label">描述</label>
                                         <div class="col-sm-10">
@@ -98,6 +109,7 @@
                                                         placeholder="请输入描述"/>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="url" class="col-sm-2 control-label">链接</label>
                                         <div class="col-sm-10">
@@ -105,6 +117,7 @@
                                                         placeholder="请输入链接"/>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="picture" class="col-sm-2 control-label">图片</label>
                                         <div class="col-sm-10">
@@ -114,6 +127,7 @@
                                             <div id="dropz" class="dropzone"></div>
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">详情</label>
                                         <div class="col-sm-10">

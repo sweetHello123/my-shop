@@ -47,6 +47,7 @@ public class UploadController {
 
         //设置文件存放路径
         String fileSavePath = request.getSession().getServletContext().getRealPath(UPLOAD_DIRECTION);
+        System.out.println(fileSavePath);
 
         //传入路径创建文件对象
         File uploadFile = new File(fileSavePath);

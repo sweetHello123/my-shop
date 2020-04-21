@@ -49,7 +49,6 @@
     <update id="update">
         update tb_content
         set
-        category_id = #{contentCategory.id},
         title = #{title},
         sub_title = #{subTitle},
         description = #{description},
