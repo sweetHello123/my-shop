@@ -10,7 +10,7 @@
         a.createTime,
         a.updateTime
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="TbUser">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.china.myshop.domain.TbUser">
         select
         <include refid="Base_Column_List"/>
         from tb_user as a
@@ -29,7 +29,7 @@
             #{id}
         </foreach>
     </delete>
-    <insert id="insert" parameterType="TbUser">
+    <insert id="insert" parameterType="com.china.myshop.domain.TbUser">
         insert into tb_user (
         id,
         email,
@@ -50,7 +50,7 @@
         #{updateTime}
         )
     </insert>
-    <update id="update" parameterType="TbUser">
+    <update id="update" parameterType="com.china.myshop.domain.TbUser">
         update tb_user
         set
         email = #{email},
@@ -61,7 +61,7 @@
         updateTime = #{updateTime}
         where id = #{id}
     </update>
-    <select id="selectByEmail" parameterType="string" resultType="TbUser">
+    <select id="selectByEmail" parameterType="string" resultType="com.china.myshop.domain.TbUser">
         select
         <include refid="Base_Column_List">
         </include>
@@ -72,30 +72,30 @@
             </if>
         </where>
     </select>
-    <select id="selectAll" resultType="TbUser">
+    <select id="selectAll" resultType="com.china.myshop.domain.TbUser">
         select
         <include refid="Base_Column_List">
         </include>
         from tb_user as a
     </select>
-    <select id="selectByPage" parameterType="java.util.Map" resultType="TbUser">
+    <select id="selectByPage" parameterType="map" resultType="com.china.myshop.domain.TbUser">
         select
         <include refid="Base_Column_List"></include>
         from tb_user as a
         <where>
             <if test="user.username != null and user.username != ''">
-                a.username like concat('%',#{tbUser.username},'%')
+                a.username like concat('%',#{user.username},'%')
             </if>
             <if test="user.email != null and user.email != ''">
-                and a.email like concat('%',#{tbUser.email},'%')
+                and a.email like concat('%',#{user.email},'%')
             </if>
             <if test="user.phone != null and user.phone != ''">
-                and a.phone like concat('%',#{tbUser.phone},'%')
+                and a.phone like concat('%',#{user.phone},'%')
             </if>
         </where>
         limit #{start},#{length}
     </select>
-    <select id="selectCount" parameterType="TbUser" resultType="java.lang.Integer">
+    <select id="selectCount" parameterType="com.china.myshop.domain.TbUser" resultType="java.lang.Integer">
         select count(*)
         from tb_user as a
         <where>

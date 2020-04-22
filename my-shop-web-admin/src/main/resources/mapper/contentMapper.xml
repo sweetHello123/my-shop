@@ -19,7 +19,7 @@
     <sql id="tbContentCategoryJoins">
         left join tb_content_category as b on a.category_id = b.id
     </sql>
-    <insert id="insert" parameterType="TbContent">
+    <insert id="insert" parameterType="com.china.myshop.domain.TbContent">
         insert into tb_content(
           id,
           category_id,
@@ -72,20 +72,20 @@
             #{id}
         </foreach>
     </delete>
-    <select id="selectAll" resultType="TbContent">
+    <select id="selectAll" resultType="com.china.myshop.domain.TbContent">
         select
         <include refid="Base_Column_List"/>
         from tb_content as a
         <include refid="tbContentCategoryJoins"/>
     </select>
-    <select id="selectByPrimaryKey" resultType="TbContent">
+    <select id="selectByPrimaryKey" resultType="com.china.myshop.domain.TbContent">
         select
         <include refid="Base_Column_List"/>
         from tb_content as a
         <include refid="tbContentCategoryJoins"/>
         where a.id = #{id,jdbcType=INTEGER}
     </select>
-    <select id="selectByPage" parameterType="map" resultType="TbContent">
+    <select id="selectByPage" parameterType="map" resultType="com.china.myshop.domain.TbContent">
         select
         <include refid="Base_Column_List"></include>
         from tb_content as a

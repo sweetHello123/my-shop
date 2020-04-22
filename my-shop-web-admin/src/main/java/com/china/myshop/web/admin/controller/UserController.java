@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("user")
 public class UserController {
+
     @Autowired
     private UserService userService;
 
@@ -112,12 +113,12 @@ public class UserController {
      * 分页处理
      *
      * @param request
-     * @param tbUser
+     * @param user
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "page", method = RequestMethod.GET)
-    public PageInfo<TbUser> page(HttpServletRequest request, TbUser tbUser) {
+    public PageInfo<TbUser> page(HttpServletRequest request, TbUser user) {
         String strDraw = request.getParameter("draw");
         String strStart = request.getParameter("start");
         String strLength = request.getParameter("length");
@@ -127,7 +128,7 @@ public class UserController {
         int length = strLength == null ? 10 : Integer.parseInt(strLength);
 
         //封装dataTables需要的结果
-        PageInfo<TbUser> pageInfo = userService.page(draw, start, length, tbUser);
+        PageInfo<TbUser> pageInfo = userService.page(draw, start, length, user);
         return pageInfo;
     }
 

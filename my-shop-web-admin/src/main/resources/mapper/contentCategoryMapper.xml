@@ -17,7 +17,7 @@
     <sql id="tbContentCategoryJoins">
         left join tb_content_category as b on a.parent_id = b.id
     </sql>
-    <select id="selectAll" resultType="TbContentCategory">
+    <select id="selectAll" resultType="com.china.myshop.domain.TbContentCategory">
         select
         <include refid="Base_Column_List"></include>
         from tb_content_category as a
@@ -27,21 +27,21 @@
         a.sort_order asc,
         a.is_parent desc
     </select>
-    <select id="selectByPrimaryKey" resultType="TbContentCategory">
+    <select id="selectByPrimaryKey" resultType="com.china.myshop.domain.TbContentCategory">
         select
         <include refid="Base_Column_List"/>
         from tb_content_category as a
         <include refid="tbContentCategoryJoins"/>
         where a.id = #{id}
     </select>
-    <select id="selectByPid" resultType="TbContentCategory">
+    <select id="selectByPid" resultType="com.china.myshop.domain.TbContentCategory">
         select
         <include refid="Base_Column_List"/>
         from tb_content_category as a
         <include refid="tbContentCategoryJoins"/>
         where a.parent_id = #{parentId}
     </select>
-    <insert id="insert" parameterType="TbContentCategory">
+    <insert id="insert" parameterType="com.china.myshop.domain.TbContentCategory">
         insert into tb_content_category(
           id,
           parent_id,
@@ -64,7 +64,7 @@
           #{updateTime}
         )
     </insert>
-    <update id="update" parameterType="TbContentCategory">
+    <update id="update" parameterType="com.china.myshop.domain.TbContentCategory">
         update tb_content_category
         set
         id = #{id},
