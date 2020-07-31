@@ -245,5 +245,4 @@ public class JacksonUtils {
     public static <T> T obj2pojo(Object obj, Class<T> clazz) {
         return objectMapper.convertValue(obj, clazz);
     }
-
 }

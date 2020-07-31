@@ -15,11 +15,13 @@
             + path + "/";
 %>
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>登录页面</title>
+
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <!-- Bootstrap 3.3.7 -->
@@ -40,8 +42,9 @@
     <!-- iCheck -->
     <script src="<%=basePath%>static/plugins/iCheck/icheck.min.js"></script>
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
+<body class="hold-transition login-page"
+      style="background: url(/static/img/shop-bg.jpg) no-repeat;background-size: 100% 100%">
+<div class=" login-box">
     <div class="login-logo">
         <a href="#"><b>我的商城</b></a>
     </div>
@@ -53,18 +56,18 @@
         <form action="<%=basePath%>login" method="post">
             <div class="input-group form-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                <input id="email" type="email" class="form-control" name="email" placeholder="邮箱" value="${user.email}">
+                <input id="email" type="email" class="form-control" name="email" placeholder="邮箱" value="${email}">
             </div>
             <div class="input-group form-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                 <input id="password" type="password" class="form-control fa-eye-slash" name="password" placeholder="密码"
-                       value="${user.password}">
+                       value="${password}">
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <div class="checkbox icheck">
                         <label>
-                            <input id="psw_checkbox" type="checkbox">显示密码
+                            <input name="isRemember" type="checkbox" ${isRemember!=null?'checked':''}>记住我
                         </label>
                     </div>
                 </div>
@@ -77,6 +80,15 @@
                     <button type="submit" class="btn btn-primary btn-block btn-flat" style="width: 80px"
                             onclick="return check()">登录
                     </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input id="psw_checkbox" type="checkbox">显示密码
+                        </label>
+                    </div>
                 </div>
             </div>
         </form>
@@ -123,7 +135,6 @@
         $("#email").val("");
         $("#password").val("");
     }
-
 </script>
 </body>
 </html>
