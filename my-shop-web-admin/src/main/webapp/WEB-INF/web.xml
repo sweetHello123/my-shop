@@ -38,4 +38,13 @@
         <servlet-name>springmvc</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>uruleServlet</servlet-name>
+        <servlet-class>com.bstek.urule.console.servlet.URuleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>uruleServlet</servlet-name>
+        <url-pattern>/urule/*</url-pattern>
+    </servlet-mapping>
 </web-app>

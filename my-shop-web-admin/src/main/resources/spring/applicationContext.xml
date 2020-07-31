@@ -11,7 +11,9 @@
        http://www.springframework.org/schema/tx
        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:property-placeholder location="classpath:properties/*.properties"/>
+    <import resource="classpath:urule-console-context.xml"/>
+
+    <context:property-placeholder location="classpath:properties/*.properties" ignore-unresolvable="true" order="1"/>
 
     <!-- 配置扫描@service注解-->
     <context:component-scan base-package="com.china.myshop.web.admin">

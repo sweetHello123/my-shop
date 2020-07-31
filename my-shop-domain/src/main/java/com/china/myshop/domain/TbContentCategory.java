@@ -14,6 +14,9 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class TbContentCategory extends BaseEntity {
+
+    private Integer id;
+
     /**
      * 父类目id
      */
@@ -45,5 +48,4 @@ public class TbContentCategory extends BaseEntity {
      * 自关联对象
      */
     private TbContentCategory parentCategory;
-
 }

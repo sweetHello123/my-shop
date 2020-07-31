@@ -107,12 +107,6 @@
     <!-- AdminLTE App -->
     <script src="<%=basePath%>static/dist/js/adminlte.min.js"></script>
 
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <%--<script src="<%=basePath%>/static/dist/js/pages/dashboard.js"></script>--%>
-
-    <!-- AdminLTE for demo purposes -->
-    <%--<script src="<%=basePath%>/static/dist/js/demo.js"></script>--%>
-
     <!-- iCheck 1.0.1 -->
     <script src="<%=basePath%>static/plugins/iCheck/icheck.min.js"></script>
 

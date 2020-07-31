@@ -13,6 +13,9 @@ import org.hibernate.validator.constraints.Email;
  */
 @Data
 public class TbUser extends BaseEntity {
+
+    private Integer id;
+
     /**
      * 邮箱
      */
@@ -34,5 +37,4 @@ public class TbUser extends BaseEntity {
      * 手机号
      */
     private String phone;
-
 }

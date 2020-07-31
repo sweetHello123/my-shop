@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 @Data
 public class TbContent extends BaseEntity {
 
+    private Integer id;
+
     /**
      * 主标题
      */

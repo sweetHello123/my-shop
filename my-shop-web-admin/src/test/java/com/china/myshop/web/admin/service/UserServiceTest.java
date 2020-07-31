@@ -12,7 +12,9 @@ import org.springframework.util.DigestUtils;
  * @date: 2019\9\9 0009 14:03
  */
 public class UserServiceTest {
+
     private UserService userService = new UserServiceImpl();
+
     /**
      * Md5加密测试
      */
@@ -44,4 +46,5 @@ public class UserServiceTest {
         byte[] bytes = Base64.decodeBase64(s.getBytes());
         System.out.println(new String(bytes).equals("admin"));
     }
+
 }
