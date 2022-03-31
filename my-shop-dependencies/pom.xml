@@ -25,7 +25,7 @@
         <junit.version>4.12</junit.version>
         <maven-resources-plugin>3.1.0</maven-resources-plugin>
         <maven-compiler-plugin>3.8.0</maven-compiler-plugin>
-        <spring.version>4.3.11.RELEASE</spring.version>
+        <spring.version>5.3.18</spring.version>
         <druid.version>1.1.9</druid.version>
         <mysql.verison>5.1.47</mysql.verison>
         <jackson.version>2.10.2</jackson.version>
