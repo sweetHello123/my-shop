@@ -44,7 +44,7 @@
         <hibernate-validate>5.3.5.Final</hibernate-validate>
         <httpcomponents>4.5.5</httpcomponents>
         <kaptcha.version>2.3</kaptcha.version>
-        <commons-email>1.4</commons-email>
+        <commons-email>1.5</commons-email>
     </properties>
 
     <dependencyManagement>
